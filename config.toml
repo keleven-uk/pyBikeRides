@@ -1,0 +1,10 @@
+#   Configure files for pyBikeRides.py
+#
+#   Copyright (C) <2024>  <Kevin Scott>
+
+[INFO]
+myVERSION = "2024.1"
+myNAME = "pyBikeRides"
+
+[APPLICATION]
+notification = true
