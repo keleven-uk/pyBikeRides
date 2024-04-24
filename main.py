@@ -22,14 +22,13 @@
 
 from windows_toasts import WindowsToaster, Toast, ToastDisplayImage
 
+import src.myBikeRides as BikeRides
 import src.myTimer as myTimer
 import src.myConfig as myConfig
 import src.myLogger as myLogger
 import src.myLicense as myLicense
 import src.utils.stubUtils as stubUtils
 import src.args as args
-
-import time
 
 ############################################################################################### __main__ ######
 
@@ -64,7 +63,7 @@ if __name__ == "__main__":
 
     myLicense.printShortLicense(myConfig.NAME, myConfig.VERSION)
 
-    time.sleep(30)
+    BikeRides.run()
 
     try:
         timeStop = timer.Stop

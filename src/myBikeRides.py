@@ -1,8 +1,8 @@
 ###############################################################################################################
-#    history.txt   Copyright (C) <2024>  <Kevin Scott>                                                        #
+#    pyBikeRides   Copyright (C) <2024>  <Kevin Scott>                                                        #                                                                                                             #    A skeleton program for a python command line script.                  .                                  #
 #                                                                                                             #
-#    History file for pyBikeRides.py                                                                          #
 #                                                                                                             #
+#     For changes see history.txt                                                                             #
 #                                                                                                             #
 ###############################################################################################################
 #    Copyright (C) <2024>  <Kevin Scott>                                                                      #
@@ -20,38 +20,54 @@
 #                                                                                                             #
 ###############################################################################################################
 
+import srtm
+import pathlib
+from io import FileIO
+from gpxplotter import add_segment_to_map, create_folium_map, read_gpx_file
 
-V2024.2
+def run():
 
-	Combines a number of .gpx files [held in the data directory] and produces resultant ride.
-		i.e. The result of all the rides into one big ride.
-	The resultant map is saved as a .html file.
+    files = findFiles()
+
+    line_options = {"weight": 8}
+
+    the_map = create_folium_map(tiles="openstreetmap")
+
+    for file in files:
+        #file = addElevation(file)
+        fileName = FileIO(pathlib.Path(file).absolute())
+
+        print(f"Processing {fileName.name}")
+
+        for track in read_gpx_file(fileName):
+            for _, segment in enumerate(track["segments"]):
+                add_segment_to_map(
+                    the_map,
+                    segment,
+                    #color_by="elevation",
+                    cmap="RdPu_09",
+                    line_options=line_options,
+            )
+
+    # To store the map as a HTML page:
+    the_map.save("map.html")
+
+    # To display the map in a Jupyter notebook:
+    #the_map
 
 
-V2024.1
+def findFiles():
 
-    Basic program completed.
+    path = pathlib.Path(__file__).parents[1]
+    files = path.joinpath(path, "data").iterdir()
 
+    return files
 
-    config.toml
-	LICENCE.txt
-	README.md
-	requirements.txt
-	data\
-		 .gpx data files live here - bike ride data.
-	logs\
-	  |  pyBikeRides.log		[logging file,  not git tracked]
-	docs\
-	  |  history.txt
-	Lib\
-	  |  __init__.py
-	  |  myConfig.py
-	  |  myLicense.py
-	  |  myLogger.py
-	  |  myTimer.py
-	  	 utils\
-           |  __init__.py
-           |  stubUtils.py
-	resources\
-	  |  tea.icon
+def addElevation(gpx):
+
+    #add elevations for all points in a GPS track
+    elevation_data = srtm.get_data()
+    elevation_data.add_elevations(gpx)
+
+    return gpx
 

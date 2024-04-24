@@ -84,7 +84,7 @@ class Config():
         """
         config = dict()
 
-        config["INFO"] = {"myVERSION": "2024.3",
+        config["INFO"] = {"myVERSION": "2024.2",
                           "myNAME"   : "pyStub"}
 
         config["APPLICATION"] = {"notification": True}
@@ -93,8 +93,7 @@ class Config():
         st_toml = toml.dumps(config)
 
         with open(self.FILE_NAME, "w") as configFile:       # In context manager.
-            configFile.write("#   Configure files for pyBikeRidespip install toml
-                .py \n")
+            configFile.write("#   Configure files for pyBikeRides.py \n")
             configFile.write("#\n")
             configFile.write("#   Copyright (C) <2024>  <Kevin Scott> \n")
             configFile.write("\n")
