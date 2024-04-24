@@ -20,6 +20,11 @@
 #                                                                                                             #
 ###############################################################################################################
 
+V2024.3
+
+	Rewrote to use gpxpy for the merging, instead of gpxplotter - seems simpler to use.
+	The resultant file is saved as a .gpx file at the moment.
+
 
 V2024.2
 

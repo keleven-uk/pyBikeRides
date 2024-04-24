@@ -133,7 +133,7 @@ $RECYCLE.BIN/
 
 # local files
 data/
-srtm/
+out/
 ruff.toml
 *.html
 

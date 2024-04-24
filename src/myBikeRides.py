@@ -20,54 +20,44 @@
 #                                                                                                             #
 ###############################################################################################################
 
-import srtm
 import pathlib
-from io import FileIO
-from gpxplotter import add_segment_to_map, create_folium_map, read_gpx_file
+
+import gpxpy
+import gpxpy.gpx
 
 def run():
 
-    files = findFiles()
+    path  = pathlib.Path(__file__).parents[1]
+    files = findFiles(path)
 
-    line_options = {"weight": 8}
+    # create new GPX file, append a blank track
+    new_gpx = gpxpy.gpx.GPX()
+    new_track = gpxpy.gpx.GPXTrack()
+    new_gpx.tracks.append(new_track)
 
-    the_map = create_folium_map(tiles="openstreetmap")
+    for f in files:
+        print(f"Processing {f}")
+        with open(f, "r") as gpx_file:
+            gpx = gpxpy.parse(gpx_file)
+            new_track.segments.append(gpx.tracks[0].segments[0])
 
-    for file in files:
-        #file = addElevation(file)
-        fileName = FileIO(pathlib.Path(file).absolute())
-
-        print(f"Processing {fileName.name}")
-
-        for track in read_gpx_file(fileName):
-            for _, segment in enumerate(track["segments"]):
-                add_segment_to_map(
-                    the_map,
-                    segment,
-                    #color_by="elevation",
-                    cmap="RdPu_09",
-                    line_options=line_options,
-            )
-
-    # To store the map as a HTML page:
-    the_map.save("map.html")
-
-    # To display the map in a Jupyter notebook:
-    #the_map
+    writeNewFile(path, new_gpx)
 
 
-def findFiles():
+def findFiles(path):
 
-    path = pathlib.Path(__file__).parents[1]
     files = path.joinpath(path, "data").iterdir()
 
     return files
 
-def addElevation(gpx):
 
-    #add elevations for all points in a GPS track
-    elevation_data = srtm.get_data()
-    elevation_data.add_elevations(gpx)
+def writeNewFile(path, new_gpx):
 
-    return gpx
+    print("Writing Combined track")
+
+    oneFile = path.joinpath(path, "out\\onefile.gpx")
+
+    with open(oneFile, "w") as f:
+        f.write(new_gpx.to_xml())
+
 
