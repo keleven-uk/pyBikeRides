@@ -1,9 +1,9 @@
 ###############################################################################################################
-#    duplicateUtils.py   Copyright (C) <2020-2024>  <Kevin Scott>                                             #                                                                                                             #                                                                                                             #
+#    bikeRideUtils.py   Copyright (C) <2024>  <Kevin Scott>                                                   #                                                                                                             #                                                                                                             #
 #    A number of helper and utility functions                                                                 #
 #                                                                                                             #
 ###############################################################################################################
-#    Copyright (C) <2020-2024>  <Kevin Scott>                                                                 #
+#    Copyright (C) <2024>  <Kevin Scott>                                                                      #
 #                                                                                                             #
 #    This program is free software: you can redistribute it and/or modify it under the terms of the           #
 #    GNU General Public License as published by the Free Software Foundation, either Version 3 of the         #
@@ -19,6 +19,7 @@
 ###############################################################################################################
 
 import os
+import pathlib
 
 from src.console import console
 
@@ -45,3 +46,34 @@ def logPrint(logger, verbose, message, style):
             console.log(f"{message}", style="warning")
         else:
             console.log(f"{message}", style="info")
+
+########################################################################################### checkPaths() #########
+def checkPaths(logger, verbose):
+    """  Checks the data directories exist, if not create them.
+    """
+
+    logPrint(logger, verbose, "Checking Paths", "info")
+
+    path     = pathlib.Path(__file__).parents[2]        #  Needs [2], because script is run in src\utils
+    data_dir = path.joinpath(path, "data")
+    out_dir  = path.joinpath(path, "out")
+    log_dir  = path.joinpath(path, "logs")
+
+    if data_dir.exists():
+        logPrint(logger, verbose, f"{data_dir} exists", "info")
+    else:
+        logPrint(logger, verbose, f"{data_dir} doesn't exists, will create", "warning")
+        data_dir.mkdir(parents=True)
+
+    if out_dir.exists():
+        logPrint(logger, verbose, f"{out_dir} exists", "info")
+    else:
+        logPrint(logger, verbose, f"{out_dir} doesn't exists, will create", "warning")
+        out_dir.mkdir(parents=True)
+
+    if log_dir.exists():
+        logPrint(logger, verbose, f"{log_dir} exists", "info")
+    else:
+        logPrint(logger, verbose, f"{log_dir} doesn't exists, will create", "warning")
+        log_dir.mkdir(parents=True)
+

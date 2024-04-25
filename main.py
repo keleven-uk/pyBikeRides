@@ -23,12 +23,12 @@
 from windows_toasts import WindowsToaster, Toast, ToastDisplayImage
 
 import src.myBikeRides as BikeRides
+import src.args as args
 import src.myTimer as myTimer
 import src.myConfig as myConfig
 import src.myLogger as myLogger
 import src.myLicense as myLicense
-import src.utils.stubUtils as stubUtils
-import src.args as args
+import src.utils.bikeRideUtils as utils
 
 ############################################################################################### __main__ ######
 
@@ -40,17 +40,19 @@ if __name__ == "__main__":
     toaster = WindowsToaster(myConfig.NAME)
     # Initialise the toast
     newToast = Toast()
+    icon    = "resources\\tea.ico"                 #  icon used by notifications
+    newToast.AddImage(ToastDisplayImage.fromPath(icon))
 
     LGpath  = "logs\\" +myConfig.NAME +".log"      #  Must be a string for a logger path.
     logger  = myLogger.get_logger(LGpath)          #  Create the logger.
     timer   = myTimer.Timer()                      #  Create a timer.
-    icon    = "resources\\tea.ico"                 #  icon used by notifications
-    newToast.AddImage(ToastDisplayImage.fromPath(icon))
+
+    utils.checkPaths(logger, False)                #  set to True to print to screen.
 
     try:
         timer.Start()
-        stubUtils.logPrint(logger, False, "-" * 100, "info")
-        stubUtils.logPrint(logger, True, f"{myConfig.NAME} {myConfig.VERSION} .::. Started at {timer.rightNow}", "info")
+        utils.logPrint(logger, False, "-" * 100, "info")
+        utils.logPrint(logger, True, f"{myConfig.NAME} {myConfig.VERSION} .::. Started at {timer.rightNow}", "info")
         if myConfig.NOTIFICATION:
             # Set the body of the notification
             newToast.text_fields = [f"{myConfig.NAME} started"]
@@ -67,7 +69,7 @@ if __name__ == "__main__":
 
     try:
         timeStop = timer.Stop
-        stubUtils.logPrint(logger, True, f"{myConfig.NAME} {myConfig.VERSION} .::. Completed in {timeStop}", "info")
+        utils.logPrint(logger, True, f"{myConfig.NAME} {myConfig.VERSION} .::. Completed in {timeStop}", "info")
         if myConfig.NOTIFICATION:
             newToast.text_fields = [f"{myConfig.NAME} .::. Completed in {timeStop}"]
             toaster.show_toast(newToast)

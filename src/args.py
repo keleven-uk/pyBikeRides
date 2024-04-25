@@ -26,7 +26,7 @@
 import textwrap
 import argparse
 import src.myLicense as myLicense
-import src.utils.stubUtils as stubUtils
+import src.utils.bikeRideUtils as utils
 
 ############################################################################################## parseArgs ######
 def parseArgs(Name, Version, logger):
@@ -64,7 +64,7 @@ def parseArgs(Name, Version, logger):
         exit(0)
 
     if args.explorer:
-        stubUtils.loadExplorer(logger)             # Load program working directory n file explorer.
+        utils.loadExplorer(logger)             # Load program working directory n file explorer.
         print("Goodbye.")
         exit(0)
 

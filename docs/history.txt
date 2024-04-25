@@ -20,6 +20,13 @@
 #                                                                                                             #
 ###############################################################################################################
 
+
+V2024.4
+
+	Added a utils function to check the existence of data, out & logs directories.
+		Will be created if they are absence.
+
+
 V2024.3
 
 	Rewrote to use gpxpy for the merging, instead of gpxplotter - seems simpler to use.
