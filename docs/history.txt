@@ -21,6 +21,15 @@
 ###############################################################################################################
 
 
+V2024.5
+
+	Added the command line arguments for input and output directories.
+		-i INP, --inp INP  Directory which hold the input data.  Default=data
+		-o OUT, --out OUT  Directory which hold the output data. Default=out
+	Amended utils.checkPaths to check for correct directories.
+	Amended to appropriate load and save functions in BikeRides to use correct directories.
+
+
 V2024.4
 
 	Added a utils function to check the existence of data, out & logs directories.

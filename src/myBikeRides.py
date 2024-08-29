@@ -1,5 +1,6 @@
 ###############################################################################################################
-#    pyBikeRides   Copyright (C) <2024>  <Kevin Scott>                                                        #                                                                                                             #    A skeleton program for a python command line script.                  .                                  #
+#    pyBikeRides   Copyright (C) <2024>  <Kevin Scott>                                                        #
+#    A skeleton program for a python command line script.                  .                                  #
 #                                                                                                             #
 #                                                                                                             #
 #     For changes see history.txt                                                                             #
@@ -21,43 +22,90 @@
 ###############################################################################################################
 
 import pathlib
+from io import FileIO
 
 import gpxpy
 import gpxpy.gpx
+import operator
+import src.srtm as srtm
+from gpxplotter import add_segment_to_map, create_folium_map, read_gpx_file
 
-def run():
+import src.srtm as srtm
 
-    path  = pathlib.Path(__file__).parents[1]
-    files = findFiles(path)
+class routes():
 
-    # create new GPX file, append a blank track
-    new_gpx = gpxpy.gpx.GPX()
-    new_track = gpxpy.gpx.GPXTrack()
-    new_gpx.tracks.append(new_track)
-
-    for f in files:
-        print(f"Processing {f}")
-        with open(f, "r") as gpx_file:
-            gpx = gpxpy.parse(gpx_file)
-            new_track.segments.append(gpx.tracks[0].segments[0])
-
-    writeNewFile(path, new_gpx)
+    def __init__(self, dirIn, dirOut):
+        self.dirIn  = dirIn
+        self.dirOut = dirOut
+        self.path   = pathlib.Path(__file__).parents[1]
+        self.files  = self. findFiles()
 
 
-def findFiles(path):
+    def build(self):
 
-    files = path.joinpath(path, "data").iterdir()
+        count = 0
 
-    return files
+        # create new GPX file, append a blank track
+        self.new_gpx = gpxpy.gpx.GPX()
+        new_track    = gpxpy.gpx.GPXTrack()
+        self.new_gpx.tracks.append(new_track)
+
+        for f in self.files:
+            count += 1
+            print(f"Processing {f}")
+            with open(f, "r") as self.gpx_file:
+                gpx = gpxpy.parse(self.gpx_file)
+                new_track.segments.append(gpx.tracks[0].segments[0])
+
+        print(f"Processed {count} files")
+        #add elevations for all points in a GPS track
+        print("Adding Elevation data")
+        elevation_data = srtm.get_data()                    #  Uses srtm.py @ https://github.com/tkrajina/srtm.py
+        elevation_data.add_elevations(self.new_gpx)
 
 
-def writeNewFile(path, new_gpx):
+        self.writeNewFile()
 
-    print("Writing Combined track")
 
-    oneFile = path.joinpath(path, "out\\onefile.gpx")
+    def plot(self):
+        print("Plotting route")
 
-    with open(oneFile, "w") as f:
-        f.write(new_gpx.to_xml())
+        oneFile = FileIO(self.path.joinpath(self.path, f"{self.dirOut}\\onefile.gpx").absolute())
+
+        line_options = {"weight": 4}
+
+        the_map = create_folium_map(tiles="openstreetmap")
+
+        for track in read_gpx_file(oneFile):
+            for i, segment in enumerate(track["segments"]):
+                add_segment_to_map(
+                    the_map,
+                    segment,
+                    #color_by="elevation",
+                    cmap="viridis",
+                    line_options=line_options,
+                )
+
+        # To store the map as a HTML page:
+        saveFile = self.path.joinpath(self.path, f"{self.dirOut}\\oneMap.html")
+        the_map.save(saveFile)
+
+
+
+    def findFiles(self):
+
+        files = self.path.joinpath(self.path, self.dirIn).iterdir()
+
+        return files
+
+
+    def writeNewFile(self):
+
+        print("Writing Combined track")
+
+        oneFile = self.path.joinpath(self.path, f"{self.dirOut}\\onefile.gpx")
+
+        with open(oneFile, "w") as f:
+            f.write(self.new_gpx.to_xml())
 
 

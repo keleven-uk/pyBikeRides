@@ -47,8 +47,6 @@ if __name__ == "__main__":
     logger  = myLogger.get_logger(LGpath)          #  Create the logger.
     timer   = myTimer.Timer()                      #  Create a timer.
 
-    utils.checkPaths(logger, False)                #  set to True to print to screen.
-
     try:
         timer.Start()
         utils.logPrint(logger, False, "-" * 100, "info")
@@ -61,11 +59,17 @@ if __name__ == "__main__":
     except (TimeoutError, AttributeError, NameError) as error:
         logger.debug(error)
 
-    args.parseArgs(myConfig.NAME, myConfig.VERSION, logger)     #  **  Need to catch arguments if required.  **
+    plot, dirIn, dirOut = args.parseArgs(myConfig.NAME, myConfig.VERSION, logger)     #  **  Need to catch arguments if required.  **
+
+    utils.checkPaths(logger, dirIn, dirOut, False)                                    #  set to True to print to screen.
 
     myLicense.printShortLicense(myConfig.NAME, myConfig.VERSION)
 
-    BikeRides.run()
+    bikeRides = BikeRides.routes(dirIn, dirOut)
+
+    bikeRides.build()
+    if plot:
+        bikeRides.plot()
 
     try:
         timeStop = timer.Stop

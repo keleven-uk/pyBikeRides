@@ -132,6 +132,7 @@ $RECYCLE.BIN/
 *.log.*
 
 # local files
+src/srtm
 data/
 out/
 ruff.toml

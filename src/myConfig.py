@@ -84,7 +84,7 @@ class Config():
         """
         config = dict()
 
-        config["INFO"] = {"myVERSION": "2024.3",
+        config["INFO"] = {"myVERSION": "2024.5",
                           "myNAME"   : "pyStub"}
 
         config["APPLICATION"] = {"notification": True}

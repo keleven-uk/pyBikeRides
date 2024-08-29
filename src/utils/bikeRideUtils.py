@@ -48,15 +48,15 @@ def logPrint(logger, verbose, message, style):
             console.log(f"{message}", style="info")
 
 ########################################################################################### checkPaths() #########
-def checkPaths(logger, verbose):
+def checkPaths(logger, dirIn, dirOut, verbose):
     """  Checks the data directories exist, if not create them.
     """
 
     logPrint(logger, verbose, "Checking Paths", "info")
 
     path     = pathlib.Path(__file__).parents[2]        #  Needs [2], because script is run in src\utils
-    data_dir = path.joinpath(path, "data")
-    out_dir  = path.joinpath(path, "out")
+    data_dir = path.joinpath(path, f"{dirIn}")
+    out_dir  = path.joinpath(path, f"{dirOut}")
     log_dir  = path.joinpath(path, "logs")
 
     if data_dir.exists():
