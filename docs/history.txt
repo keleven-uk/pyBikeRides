@@ -21,6 +21,15 @@
 ###############################################################################################################
 
 
+V2024.6
+
+	Added a new method to the Routes class - correct().
+		Loads the all the gpx files in a given directory corrects the elevation data and  saves
++       the files into the given output directory.  The files are save with the same filename
++       DOES NOT MERGE.
+	The new method can be selected using the command line arguments.
+
+
 V2024.5
 
 	Added the command line arguments for input and output directories.

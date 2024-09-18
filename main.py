@@ -59,7 +59,7 @@ if __name__ == "__main__":
     except (TimeoutError, AttributeError, NameError) as error:
         logger.debug(error)
 
-    plot, dirIn, dirOut = args.parseArgs(myConfig.NAME, myConfig.VERSION, logger)     #  **  Need to catch arguments if required.  **
+    correct, plot, dirIn, dirOut = args.parseArgs(myConfig.NAME, myConfig.VERSION, logger)     #  **  Need to catch arguments if required.  **
 
     utils.checkPaths(logger, dirIn, dirOut, False)                                    #  set to True to print to screen.
 
@@ -67,9 +67,12 @@ if __name__ == "__main__":
 
     bikeRides = BikeRides.routes(dirIn, dirOut)
 
-    bikeRides.build()
-    if plot:
-        bikeRides.plot()
+    if correct:
+        bikeRides.correct()
+    else:
+        bikeRides.build()
+        if plot:
+            bikeRides.plot()
 
     try:
         timeStop = timer.Stop

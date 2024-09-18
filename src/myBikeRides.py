@@ -26,19 +26,28 @@ from io import FileIO
 
 import gpxpy
 import gpxpy.gpx
-import operator
 import src.srtm as srtm
 from gpxplotter import add_segment_to_map, create_folium_map, read_gpx_file
 
-import src.srtm as srtm
 
 class routes():
+    """  A class that contains some routines for merging, correcting and plotting gpx files.
+         The class uses gpxpy to parse the gpx files.
+         Elevation data is corrected using srtm.py @ https://github.com/tkrajina/srtm.py.
+
+         build()   - merges all the gpx files in a given import directory, corrects the elevation data in the merged file
+                     and save the merged file to the given directory.
+         correct() - Loads the all the gpx files in a given directory corrects the elevation data and  saves
+                     the files into the given output directory.  The files are save with the same filename
+                     DOES NOT MERGE.
+         plot()    - Produces a HTML map of a gpx file, usually called on the output of build().
+    """
 
     def __init__(self, dirIn, dirOut):
-        self.dirIn  = dirIn
-        self.dirOut = dirOut
-        self.path   = pathlib.Path(__file__).parents[1]
-        self.files  = self. findFiles()
+        self.dirIn   = dirIn
+        self.dirOut  = dirOut
+        self.path    = pathlib.Path(__file__).parents[1]
+        self.files   = self._findFiles()
 
 
     def build(self):
@@ -64,7 +73,27 @@ class routes():
         elevation_data.add_elevations(self.new_gpx)
 
 
-        self.writeNewFile()
+        self._riteNewFile()
+
+
+    def correct(self):
+        count = 0
+        elevation_data = srtm.get_data()                    #  Uses srtm.py @ https://github.com/tkrajina/srtm.py
+
+        for f in self.files:
+            count += 1
+            print(f"Adding Elevation data to {f}")
+            with open(f, "r") as self.gpx_file:
+                gpx = gpxpy.parse(self.gpx_file)
+                elevation_data.add_elevations(gpx)
+                fileName = f.name
+                correctedFile = self.path.joinpath(self.path, f"{self.dirOut}\\{fileName}")
+
+                with open(correctedFile, "w") as f:
+                    f.write(gpx.to_xml())
+
+        print(f"Processed {count} files")
+
 
 
     def plot(self):
@@ -77,7 +106,7 @@ class routes():
         the_map = create_folium_map(tiles="openstreetmap")
 
         for track in read_gpx_file(oneFile):
-            for i, segment in enumerate(track["segments"]):
+            for _, segment in enumerate(track["segments"]):
                 add_segment_to_map(
                     the_map,
                     segment,
@@ -91,15 +120,14 @@ class routes():
         the_map.save(saveFile)
 
 
-
-    def findFiles(self):
+    def _findFiles(self):
 
         files = self.path.joinpath(self.path, self.dirIn).iterdir()
 
         return files
 
 
-    def writeNewFile(self):
+    def _writeNewFile(self):
 
         print("Writing Combined track")
 

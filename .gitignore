@@ -134,7 +134,10 @@ $RECYCLE.BIN/
 # local files
 src/srtm
 data/
+data_srtm/
 out/
+today/
+todayOut/
 ruff.toml
 *.html
 
