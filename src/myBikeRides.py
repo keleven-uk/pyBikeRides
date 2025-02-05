@@ -73,7 +73,7 @@ class routes():
         elevation_data.add_elevations(self.new_gpx)
 
 
-        self._riteNewFile()
+        self._writeNewFile()
 
 
     def correct(self):

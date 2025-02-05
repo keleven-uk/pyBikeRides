@@ -135,6 +135,7 @@ $RECYCLE.BIN/
 src/srtm
 data/
 data_srtm/
+data_Walks/
 out/
 today/
 todayOut/

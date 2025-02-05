@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    myConfig.py    Copyright (C) <2024>  <Kevin Scott>                                                       #
+#    myConfig.py    Copyright (C) <2024-25>  <Kevin Scott>                                                    #
 #                                                                                                             #
 #    A class that acts has a wrapper around the configure file - config.toml.                                 #
 #    The configure file is first read, then the properties are made available.                                #
@@ -84,8 +84,8 @@ class Config():
         """
         config = dict()
 
-        config["INFO"] = {"myVERSION": "2024.6",
-                          "myNAME"   : "pyStub"}
+        config["INFO"] = {"myVERSION": "2025.7",
+                          "myNAME"   : "pyBikeRides"}
 
         config["APPLICATION"] = {"notification": True}
 
@@ -95,7 +95,7 @@ class Config():
         with open(self.FILE_NAME, "w") as configFile:       # In context manager.
             configFile.write("#   Configure files for pyBikeRides.py \n")
             configFile.write("#\n")
-            configFile.write("#   Copyright (C) <2024>  <Kevin Scott> \n")
+            configFile.write("#   Copyright (C) <2024-25>  <Kevin Scott> \n")
             configFile.write("\n")
             configFile.writelines(st_toml)                  # Write configure file.
 

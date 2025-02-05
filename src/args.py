@@ -44,7 +44,7 @@ def parseArgs(Name, Version, logger):
         pyBikeRides.
         -----------------------
         A Python script to display my bike rides."""),
-        epilog=f" Kevin Scott (C) 2021-24 :: {Name} {Version}")
+        epilog=f" Kevin Scott (C) 2024-25 :: {Name} {Version}")
 
     parser.add_argument("-l", "--license",  action="store_true", help="Print the Software License.")
     parser.add_argument("-v", "--version",  action="store_true", help="Print the version of the application.")
