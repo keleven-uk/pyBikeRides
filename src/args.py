@@ -50,6 +50,7 @@ def parseArgs(Name, Version, logger):
     parser.add_argument("-v", "--version",  action="store_true", help="Print the version of the application.")
     parser.add_argument("-e", "--explorer", action="store_true", help="Load program working directory into file explorer.")
     parser.add_argument("-c", "--correct",  action="store_true", help="Correct Elevation data to file, DOES NOT MERGE.")
+    parser.add_argument("-x", "--xcorrect", action="store_true", help="Do Not Correct Elevation data to file, Default is to correct.")
     parser.add_argument("-p", "--plot",     action="store_true", help="Plot the one route using gpxplotter.")
     parser.add_argument("-i", "--inp",      default="data", type=pathlib.Path, help="Directory which hold the input data.  Default=data")
     parser.add_argument("-o", "--out",      default="out",  type=pathlib.Path, help="Directory which hold the output data. Default=out")
@@ -73,4 +74,4 @@ def parseArgs(Name, Version, logger):
         print("Goodbye.")
         exit(0)
 
-    return args.correct, args.plot, args.inp, args.out
+    return args.correct, args.xcorrect, args.plot, args.inp, args.out

@@ -21,6 +21,13 @@
 ###############################################################################################################
 
 
+V2025.8
+
+	Added an option to merge files without correcting elevation data - -x.
+	Tested on Python V3.14. - all okay.
+		updated requirements.txt.
+
+
 V2025.7
 
 	Tested on Python V3.13.2 - all okay.

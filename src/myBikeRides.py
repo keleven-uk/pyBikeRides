@@ -43,11 +43,12 @@ class routes():
          plot()    - Produces a HTML map of a gpx file, usually called on the output of build().
     """
 
-    def __init__(self, dirIn, dirOut):
-        self.dirIn   = dirIn
-        self.dirOut  = dirOut
-        self.path    = pathlib.Path(__file__).parents[1]
-        self.files   = self._findFiles()
+    def __init__(self, dirIn, dirOut, xcorrect):
+        self.dirIn    = dirIn
+        self.dirOut   = dirOut
+        self.xcorrect = xcorrect
+        self.path     = pathlib.Path(__file__).parents[1]
+        self.files    = self._findFiles()
 
 
     def build(self):
@@ -67,10 +68,12 @@ class routes():
                 new_track.segments.append(gpx.tracks[0].segments[0])
 
         print(f"Processed {count} files")
-        #add elevations for all points in a GPS track
-        print("Adding Elevation data")
-        elevation_data = srtm.get_data()                    #  Uses srtm.py @ https://github.com/tkrajina/srtm.py
-        elevation_data.add_elevations(self.new_gpx)
+
+        if not self.xcorrect:
+            #add elevations for all points in a GPS track
+            print("Adding Elevation data")
+            elevation_data = srtm.get_data()                    #  Uses srtm.py @ https://github.com/tkrajina/srtm.py
+            elevation_data.add_elevations(self.new_gpx)
 
 
         self._writeNewFile()

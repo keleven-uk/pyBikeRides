@@ -133,7 +133,8 @@ $RECYCLE.BIN/
 
 # local files
 src/srtm
-data/
+data_350/
+data_650/
 data_srtm/
 data_Walks/
 out/

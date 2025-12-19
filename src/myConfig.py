@@ -84,7 +84,7 @@ class Config():
         """
         config = dict()
 
-        config["INFO"] = {"myVERSION": "2025.7",
+        config["INFO"] = {"myVERSION": "2025.8",
                           "myNAME"   : "pyBikeRides"}
 
         config["APPLICATION"] = {"notification": True}

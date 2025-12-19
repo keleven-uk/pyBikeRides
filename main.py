@@ -59,13 +59,13 @@ if __name__ == "__main__":
     except (TimeoutError, AttributeError, NameError) as error:
         logger.debug(error)
 
-    correct, plot, dirIn, dirOut = args.parseArgs(myConfig.NAME, myConfig.VERSION, logger)     #  **  Need to catch arguments if required.  **
+    correct, xcorrect, plot, dirIn, dirOut = args.parseArgs(myConfig.NAME, myConfig.VERSION, logger)     #  **  Need to catch arguments if required.  **
 
     utils.checkPaths(logger, dirIn, dirOut, False)                                    #  set to True to print to screen.
 
     myLicense.printShortLicense(myConfig.NAME, myConfig.VERSION)
 
-    bikeRides = BikeRides.routes(dirIn, dirOut)
+    bikeRides = BikeRides.routes(dirIn, dirOut, xcorrect)
 
     if correct:
         bikeRides.correct()
