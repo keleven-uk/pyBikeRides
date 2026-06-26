@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    history.txt   Copyright (C) <2024>  <Kevin Scott>                                                        #
+#    history.txt   Copyright (C) <2024-26>  <Kevin Scott>                                                     #
 #                                                                                                             #
 #    History file for pyBikeRides.py                                                                          #
 #                                                                                                             #
@@ -19,6 +19,13 @@
 #    If not, see <http://www.gnu.org/licenses/>.                                                              #
 #                                                                                                             #
 ###############################################################################################################
+
+
+V2026.9
+
+	Amended the arguments -v & -l to print the Python version as well as other stuff.
+
+	Running on Python V3.14.6.  Updated all libraries and requirements.txt
 
 
 V2025.8

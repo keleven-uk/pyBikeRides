@@ -18,4 +18,4 @@ Also need srtm.py @ https://github.com/tkrajina/srtm.py>
 
 For changes see history.txt
 
-Kevin Scott (C) 2025 :: PyBikeRides V2025.8
+Kevin Scott (C) 2024-26 :: PyBikeRides V2026.9

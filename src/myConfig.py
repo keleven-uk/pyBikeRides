@@ -1,12 +1,11 @@
 ###############################################################################################################
-#    myConfig.py    Copyright (C) <2024-25>  <Kevin Scott>                                                    #
+#    myConfig.py    Copyright (C) <2024-26>  <Kevin Scott>                                                    #
 #                                                                                                             #
 #    A class that acts has a wrapper around the configure file - config.toml.                                 #
 #    The configure file is first read, then the properties are made available.                                #
 #    The configure file is currently in toml format.                                                          #
 #                                                                                                             #
 ###############################################################################################################
-#    Copyright (C) <2024>  <Kevin Scott>                                                                      #
 #                                                                                                             #
 #    This program is free software: you can redistribute it and/or modify it under the terms of the           #
 #    GNU General Public License as published by the Free Software Foundation, either Version 3 of the         #
@@ -84,7 +83,7 @@ class Config():
         """
         config = dict()
 
-        config["INFO"] = {"myVERSION": "2025.8",
+        config["INFO"] = {"myVERSION": "2026.9",
                           "myNAME"   : "pyBikeRides"}
 
         config["APPLICATION"] = {"notification": True}
@@ -95,7 +94,7 @@ class Config():
         with open(self.FILE_NAME, "w") as configFile:       # In context manager.
             configFile.write("#   Configure files for pyBikeRides.py \n")
             configFile.write("#\n")
-            configFile.write("#   Copyright (C) <2024-25>  <Kevin Scott> \n")
+            configFile.write("#   Copyright (C) <2024-26>  <Kevin Scott> \n")
             configFile.write("\n")
             configFile.writelines(st_toml)                  # Write configure file.
 

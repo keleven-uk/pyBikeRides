@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    args.py   Copyright (C) <2024>  <Kevin Scott>                                                            #
+#    args.py   Copyright (C) <2024-26>  <Kevin Scott>                                                         #
 #                                                                                                             #
 #    Parse the command line arguments.                                     .                                  #
 #    Will handle argument of -v, -h & -e                                                                      #
@@ -8,7 +8,6 @@
 #     For changes see history.txt                                                                             #
 #                                                                                                             #
 ###############################################################################################################
-#    Copyright (C) <2024>  <Kevin Scott>                                                                      #
 #                                                                                                             #
 #    This program is free software: you can redistribute it and/or modify it under the terms of the           #
 #    GNU General Public License as published by the Free Software Foundation, either Version 3 of the         #
@@ -23,6 +22,7 @@
 #                                                                                                             #
 ###############################################################################################################
 
+import sys
 import pathlib
 import textwrap
 import argparse
@@ -59,13 +59,14 @@ def parseArgs(Name, Version, logger):
 
     if args.version:
         myLicense.printShortLicense(Name, Version)
-        logger.info(f"End of {Name} V{Version}: version")
+        utils.logPrint(logger, True, f"Running on {sys.version} Python", "info")
+        utils.logPrint(logger, True, f"End of {Name} V{Version}: version", "info")
         print("Goodbye.")
         exit(0)
 
     if args.license:
         myLicense.printLongLicense(Name, Version)
-        logger.info(f"End of {Name} {Version} : Printed Licence")
+        utils.logPrint(logger, True, f"End of {Name} {Version} : Printed Licence", "info")
         print("Goodbye.")
         exit(0)
 
