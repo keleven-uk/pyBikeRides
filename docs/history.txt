@@ -3,9 +3,7 @@
 #                                                                                                             #
 #    History file for pyBikeRides.py                                                                          #
 #                                                                                                             #
-#                                                                                                             #
 ###############################################################################################################
-#    Copyright (C) <2024>  <Kevin Scott>                                                                      #
 #                                                                                                             #
 #    This program is free software: you can redistribute it and/or modify it under the terms of the           #
 #    GNU General Public License as published by the Free Software Foundation, either Version 3 of the         #
@@ -21,26 +19,55 @@
 ###############################################################################################################
 
 
-V2026.9
+-----------------------------------------------------------------------------------------
+File                                                  blank        comment           code
+-----------------------------------------------------------------------------------------
+pyBikeRides\today\20260812a.gpx                           0              0          11329
+pyBikeRides\today\20260812b.gpx                           0              0           9137
+pyBikeRides\src\myBikeRides.py                           42             35             70
+pyBikeRides\main.py                                      15             26             45
+pyBikeRides\src\myConfig.py                              21             38             43
+pyBikeRides\src\utils\bikeRideUtils.py                   13             29             37
+pyBikeRides\src\args.py                                  10             32             36
+pyBikeRides\src\myTimer.py                               19             43             36
+pyBikeRides\ruff.toml                                     7              8             30
+pyBikeRides\src\myLogger.py                               8             29             18
+pyBikeRides\src\myLicense.py                              7             35             11
+pyBikeRides\pyBikeRides.code-workspace                    0              0              8
+pyBikeRides\src\console.py                                6             28              8
+pyBikeRides\buildAll.bat                                  0              0              6
+pyBikeRides\config.toml                                   2              3              5
+-----------------------------------------------------------------------------------------
+SUM:                                                    150            306          20819
+-----------------------------------------------------------------------------------------
+
+V2026.10
+
+	Amended the file search, to include sub directories.
+
+	Running on Python V3.14.7.  Updated all libraries and requirements.txt
+
+
+V2026.9		[26 June 2026]
 
 	Amended the arguments -v & -l to print the Python version as well as other stuff.
 
 	Running on Python V3.14.6.  Updated all libraries and requirements.txt
 
 
-V2025.8
+V2025.8		[19 December 2025]
 
 	Added an option to merge files without correcting elevation data - -x.
 	Tested on Python V3.14. - all okay.
 		updated requirements.txt.
 
 
-V2025.7
+V2025.7		[5 February 2025]
 
 	Tested on Python V3.13.2 - all okay.
 
 
-V2024.6
+V2024.6		[18 September 2024]
 
 	Added a new method to the Routes class - correct().
 		Loads the all the gpx files in a given directory corrects the elevation data and  saves
@@ -49,7 +76,7 @@ V2024.6
 	The new method can be selected using the command line arguments.
 
 
-V2024.5
+V2024.5		[29 August 2024]
 
 	Added the command line arguments for input and output directories.
 		-i INP, --inp INP  Directory which hold the input data.  Default=data
@@ -58,26 +85,26 @@ V2024.5
 	Amended to appropriate load and save functions in BikeRides to use correct directories.
 
 
-V2024.4
+V2024.4  [25 April 2024]
 
 	Added a utils function to check the existence of data, out & logs directories.
 		Will be created if they are absence.
 
 
-V2024.3
+V2024.3		[24 April 2024]
 
 	Rewrote to use gpxpy for the merging, instead of gpxplotter - seems simpler to use.
 	The resultant file is saved as a .gpx file at the moment.
 
 
-V2024.2
+V2024.2		[24 April 2024]
 
 	Combines a number of .gpx files [held in the data directory] and produces resultant ride.
 		i.e. The result of all the rides into one big ride.
 	The resultant map is saved as a .html file.
 
 
-V2024.1
+V2024.1		[23 April 2024]
 
     Basic program completed.
 

@@ -1,12 +1,11 @@
 ###############################################################################################################
-#    pyBikeRides   Copyright (C) <2024>  <Kevin Scott>                                                        #
-#    A skeleton program for a python command line script.                  .                                  #
+#    pyBikeRides   Copyright (C) <2024 - 26>  <Kevin Scott>                                                   #
 #                                                                                                             #
+#    A skeleton program for a python command line script.                                                     #
 #                                                                                                             #
 #     For changes see history.txt                                                                             #
 #                                                                                                             #
 ###############################################################################################################
-#    Copyright (C) <2024>  <Kevin Scott>                                                                      #
 #                                                                                                             #
 #    This program is free software: you can redistribute it and/or modify it under the terms of the           #
 #    GNU General Public License as published by the Free Software Foundation, either Version 3 of the         #
@@ -60,9 +59,15 @@ class routes():
         new_track    = gpxpy.gpx.GPXTrack()
         self.new_gpx.tracks.append(new_track)
 
+        print(self.files)
+
         for f in self.files:
-            count += 1
             print(f"Processing {f}")
+            if f.is_dir():
+                continue
+
+            count += 1
+            
             with open(f, "r") as self.gpx_file:
                 gpx = gpxpy.parse(self.gpx_file)
                 new_track.segments.append(gpx.tracks[0].segments[0])
@@ -125,7 +130,7 @@ class routes():
 
     def _findFiles(self):
 
-        files = self.path.joinpath(self.path, self.dirIn).iterdir()
+        files = self.path.joinpath(self.path, self.dirIn).rglob('*.gpx')
 
         return files
 

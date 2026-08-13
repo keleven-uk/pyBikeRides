@@ -3,7 +3,7 @@
 #   Copyright (C) <2024>  <Kevin Scott>
 
 [INFO]
-myVERSION = "2026.9"
+myVERSION = "2026.10"
 myNAME = "pyBikeRides"
 
 [APPLICATION]
